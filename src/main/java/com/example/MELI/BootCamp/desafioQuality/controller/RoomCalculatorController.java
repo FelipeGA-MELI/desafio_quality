@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/room")
 public class RoomCalculatorController {
@@ -19,13 +21,13 @@ public class RoomCalculatorController {
         this.roomCalculatorService = roomCalculatorService;
     }
 
-    @PostMapping("/biggestRoom")
+    @PostMapping("/biggest")
     public ResponseEntity<String> getBiggestRoom(@RequestBody Property property) {
         return new ResponseEntity<>(roomCalculatorService.getBiggestRoom(property),HttpStatus.OK);
     }
 
-    @PostMapping("/sizeEachRoom")
-    public ResponseEntity<SizeOfEachRoomDTO> getSizeOfEachRoom(@RequestBody Property property) {
+    @PostMapping("/sizeOfEach")
+    public ResponseEntity<List<SizeOfEachRoomDTO>> getSizeOfEachRoom(@RequestBody Property property) {
         return new ResponseEntity<>(roomCalculatorService.getSizeOfEachRoom(property),HttpStatus.OK);
     }
 }

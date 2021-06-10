@@ -4,6 +4,11 @@ public class SizeOfEachRoomDTO {
     private String room_name;
     private double roo_size;
 
+    public SizeOfEachRoomDTO(String room_name, double roo_size) {
+        this.room_name = room_name;
+        this.roo_size = roo_size;
+    }
+
     public String getRoom_name() {
         return room_name;
     }
