@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,12 +22,12 @@ public class RoomCalculatorController {
     }
 
     @PostMapping("/biggest")
-    public ResponseEntity<String> getBiggestRoom(@RequestBody Property property) {
+    public ResponseEntity<String> getBiggestRoom(@RequestBody @Valid Property property) {
         return new ResponseEntity<>(roomCalculatorService.getBiggestRoom(property),HttpStatus.OK);
     }
 
     @PostMapping("/sizeOfEach")
-    public ResponseEntity<List<SizeOfEachRoomDTO>> getSizeOfEachRoom(@RequestBody Property property) {
+    public ResponseEntity<List<SizeOfEachRoomDTO>> getSizeOfEachRoom(@RequestBody @Valid Property property) {
         return new ResponseEntity<>(roomCalculatorService.getSizeOfEachRoom(property),HttpStatus.OK);
     }
 }

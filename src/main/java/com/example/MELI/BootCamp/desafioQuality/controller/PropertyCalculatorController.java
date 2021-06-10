@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/property")
@@ -19,12 +20,12 @@ public class PropertyCalculatorController {
     }
 
     @PostMapping("/calculateArea")
-    public ResponseEntity<Double> calculatePropertyArea(@RequestBody Property property) {
+    public ResponseEntity<Double> calculatePropertyArea(@RequestBody @Valid Property property) {
         return new ResponseEntity<>(propertyCalculatorService.calculatePropertyArea(property), HttpStatus.OK);
     }
 
     @PostMapping("calculateValue")
-    public ResponseEntity<Double> calculatePopertyValue(@RequestBody Property property) {
+    public ResponseEntity<Double> calculatePopertyValue(@RequestBody @Valid Property property) {
         return new ResponseEntity<>(propertyCalculatorService.calculatePropertyValue(property),HttpStatus.OK);
     }
 }
