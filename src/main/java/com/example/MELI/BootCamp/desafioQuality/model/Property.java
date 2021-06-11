@@ -1,6 +1,7 @@
 package com.example.MELI.BootCamp.desafioQuality.model;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ public class Property {
     private String prop_name;
 
     @NotNull(message = "O bairro não pode estar vazio.")
+    @NotEmpty(message = "O bairro não pode estar vazio.")
     @Size(min = 1,max = 40,message = "Comprimento máximo de 45 caracteres.")
     private String prop_district;
 
