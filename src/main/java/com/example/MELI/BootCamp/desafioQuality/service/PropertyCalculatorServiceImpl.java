@@ -1,16 +1,19 @@
 package com.example.MELI.BootCamp.desafioQuality.service;
 
-import com.example.MELI.BootCamp.desafioQuality.exceptions.DistrictNotFound;
 import com.example.MELI.BootCamp.desafioQuality.model.Property;
 import com.example.MELI.BootCamp.desafioQuality.model.Room;
+import com.example.MELI.BootCamp.desafioQuality.repository.APIrepository;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class PropertyCalculatorServiceImpl implements PropertyCalculatorService {
+    private final APIrepository apIrepository;
+
+    public PropertyCalculatorServiceImpl(APIrepository apIrepository) {
+        this.apIrepository = apIrepository;
+    }
+
     @Override
     public Double calculatePropertyArea(Property property) {
         List<Room> roomList = property.getProp_rooms();
@@ -24,20 +27,9 @@ public class PropertyCalculatorServiceImpl implements PropertyCalculatorService 
 
     @Override
     public Double calculatePropertyValue(Property property) {
-        Map<String,Double> districtMap = new HashMap<>();
-        Double propertyValue;
+        Double districtValue = apIrepository.getValueByDistrict(property.getProp_district());
 
-        districtMap.put("marambaia",10.0);
-        districtMap.put("marco",50.0);
-        districtMap.put("jurunas",5.0);
-        districtMap.put("guamá",7.0);
-
-        double SquereMeterValue = districtMap.getOrDefault(property.getProp_district(),-1.0);
-
-        if(SquereMeterValue < 0)
-            throw new DistrictNotFound("Bairro não encontrado.");
-
-        propertyValue = calculatePropertyArea(property) * SquereMeterValue;
+        Double propertyValue = districtValue * calculatePropertyArea(property);
 
         return propertyValue;
     }
