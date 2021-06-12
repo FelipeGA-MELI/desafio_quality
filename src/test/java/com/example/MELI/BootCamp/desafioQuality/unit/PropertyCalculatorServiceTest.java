@@ -24,21 +24,26 @@ public class PropertyCalculatorServiceTest {
     @Autowired
     private PropertyCalculatorService propertyCalculatorService;
 
+    private Property property;
+
     @BeforeEach
     void setup() {
+        configureProperty();
         Mockito.when(apIrepository.getValueByDistrict("marambaia")).thenReturn(10.0);
     }
 
-    @Test
-    public void shouldReturnRightPropertyArea() {
+    private void configureProperty() {
         List<Room> roomList = new LinkedList<>();
 
         roomList.add(new Room("Cozinha",10.0,5.0));
         roomList.add(new Room("Quarto",5.0,5.0));
         roomList.add(new Room("Sala",20.0,10.0));
 
-        Property property = new Property("TestePropriedade","marambaia",roomList);
+        property = new Property("TestePropriedade","marambaia",roomList);
+    }
 
+    @Test
+    public void shouldReturnRightPropertyArea() {
         Double propertyArea = propertyCalculatorService.calculatePropertyArea(property);
 
         Assertions.assertEquals(275,propertyArea);
@@ -46,14 +51,6 @@ public class PropertyCalculatorServiceTest {
 
     @Test
     public void shouldReturnPropertyValue() {
-        List<Room> roomList = new LinkedList<>();
-
-        roomList.add(new Room("Cozinha",10.0,5.0));
-        roomList.add(new Room("Quarto",5.0,5.0));
-        roomList.add(new Room("Sala",20.0,10.0));
-
-        Property property = new Property("TestePropriedade","marambaia",roomList);
-
         Double propertyValue = propertyCalculatorService.calculatePropertyValue(property);
 
         Assertions.assertEquals(2750,propertyValue);
