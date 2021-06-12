@@ -4,22 +4,17 @@ import com.example.MELI.BootCamp.desafioQuality.DTOs.SizeOfEachRoomDTO;
 import com.example.MELI.BootCamp.desafioQuality.model.Property;
 import com.example.MELI.BootCamp.desafioQuality.model.Room;
 import com.example.MELI.BootCamp.desafioQuality.service.RoomCalculatorService;
-import com.example.MELI.BootCamp.desafioQuality.service.RoomCalculatorServiceImpl;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.LinkedList;
 import java.util.List;
 
 @SpringBootTest
 public class RoomCalculatorServiceTest {
-    private static RoomCalculatorService roomCalculatorService;
-
-    @BeforeAll
-    static void setup() {
-        roomCalculatorService = new RoomCalculatorServiceImpl();
-    }
+    @Autowired
+    private RoomCalculatorService roomCalculatorService;
 
     @Test
     public void shouldReturnBiggestRoom() {

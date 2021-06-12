@@ -1,6 +1,5 @@
 package com.example.MELI.BootCamp.desafioQuality.unit;
 
-import com.example.MELI.BootCamp.desafioQuality.exceptions.DistrictNotFound;
 import com.example.MELI.BootCamp.desafioQuality.model.Property;
 import com.example.MELI.BootCamp.desafioQuality.model.Room;
 import com.example.MELI.BootCamp.desafioQuality.repository.APIrepository;
@@ -28,7 +27,6 @@ public class PropertyCalculatorServiceTest {
     @BeforeEach
     void setup() {
         Mockito.when(apIrepository.getValueByDistrict("marambaia")).thenReturn(10.0);
-        Mockito.when(apIrepository.getValueByDistrict("maraaia")).thenThrow(new DistrictNotFound("Bairro não existe."));
     }
 
     @Test
@@ -59,18 +57,5 @@ public class PropertyCalculatorServiceTest {
         Double propertyValue = propertyCalculatorService.calculatePropertyValue(property);
 
         Assertions.assertEquals(2750,propertyValue);
-    }
-
-    @Test
-    public void shouldReturnException() {
-        List<Room> roomList = new LinkedList<>();
-
-        roomList.add(new Room("Cozinha",10.0,5.0));
-        roomList.add(new Room("Quarto",5.0,5.0));
-        roomList.add(new Room("Sala",20.0,10.0));
-
-        Property property = new Property("TestePropriedade","maraaia",roomList);
-
-        Assertions.assertThrows(DistrictNotFound.class,() -> propertyCalculatorService.calculatePropertyValue(property));
     }
 }
