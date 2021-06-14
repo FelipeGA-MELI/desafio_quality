@@ -19,6 +19,7 @@ public class Property {
     private String prop_district;
 
     @Valid
+    @NotNull(message = "")
     private List<Room> prop_rooms;
 
     public Property() { }

@@ -4,7 +4,6 @@ import com.example.MELI.BootCamp.desafioQuality.DTOs.SizeOfEachRoomDTO;
 import com.example.MELI.BootCamp.desafioQuality.model.Property;
 import com.example.MELI.BootCamp.desafioQuality.model.Room;
 import org.springframework.stereotype.Service;
-
 import java.util.LinkedList;
 import java.util.List;
 
