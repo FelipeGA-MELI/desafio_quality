@@ -80,7 +80,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    public void shouldReturnBadRequestForPropertyValue() throws Exception{
+    public void shouldReturnNotFoundForPropertyValue() throws Exception{
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/property/calculateValue")
                 .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8").content(this.mapper.writeValueAsBytes(wrongProperty));
